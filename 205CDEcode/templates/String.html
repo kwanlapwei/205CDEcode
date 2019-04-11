@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<style type="text/css">
+img.contact{
+  width: 50px;
+  height: 50px;
+}
+
+img.HOT{
+  width: 75px;
+  height: 75px
+}
+
+button:hover {
+  opacity: 0.5;
+}
+
+form {
+  border: 3px solid #f1f1f1;
+}
+
+
+button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+}
+
+.container {
+  padding: 12px;
+}
+
+</style>
+</head>
+<body>
+<script type="text/javascript">
+  
+</script>
+  {% if session['usrname'] %}
+    <p style="position:absolute;top:0px;right:0px;">Welcome,{{ session['usrname'] }}!</p>
+  {% else %}
+    <p style="position:absolute;top:0px;right:0px;"><a href="http://localhost:5000/register">Register</a> or <a href="http://localhost:5000/login">Login</a> if you already have account</p>
+  {% endif %}
+
+  
+  <div class="jumbotron text-center bg-light" style="margin-bottom:0; min-height: 0px" >
+      <h1 class="display-3">Badminton sells and services</h1>
+  </div>
+
+  <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <a class="navbar-brand" href="http://localhost:5000/home">Home</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+      <ul class="navbar-nav ">
+            <a class="nav-link" href="http://localhost:5000/str">Service booking</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="http://localhost:5000/cart">Shopping Cart</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="http://localhost:5000/product">Shop</a>
+          </li> 
+          <li class="nav-item">
+            <a class="nav-link" href="http://localhost:5000/logout">Logout</a>
+          </li>   
+      </ul>
+    </div>  
+  </nav>
+
+  <div class="container-fiuld" style="margin:20px 50px 0px 50px;">
+    <div class="row">
+      <div class="col-sm-12">
+      <form action="http://localhost:5000/str" method="POST">
+        <div class="container">
+            <legend>Sringing Service </legend>
+            <h6>String Comparison Standard:</h6>
+            <ul>
+              <li>Repulsion Power<b>(R)</b></li>
+              <li>Hitting sound (Feeling Hard / Soft) <b>(F)</b></li>
+              <li>Shock Absorption <b>(S)</b></li>
+              <li>Control <b>(C)</b></li>
+              <li>Durability <b>(D)</b></li>
+            </ul><br>
+            <label for="customer">Your Name:</label>
+            <input type="text" name="customer" required=""><br>
+            <label for="string">Choose your string:</label>
+            <select name="string" required="">
+              <option hidden>String Name: (R)/(F)/(S)/(C)/(D)</option>
+              <option value="BG-65">BG-65 0.7 mm 6/6/6/6/8</option>
+              <option value="BG-66">BG-66 0.66 mm 9/7/7/7/5</option>
+              <option value="BG-70Pro">BG-70Pro 0.68 mm 7/6/5/6/7</option>
+              <option value="BG-Aerobite">BG-Aerobite (JP)0.67/0.61 mm 11/10/8/11/6</option>
+              <option value="Cyber">Cyber Natural 100(JP) 0.70 mm 8/6/9/10/6</option>
+            </select><br>
+            <label for="bk date">Date:</label>
+            <input id="bk date" type="date" name="date" value="" min="" required><br>
+            <label for="bk time">Time:</label>  
+                    
+            <input name="time" type="radio" value="after10">10:00-12:00
+            <input name="time" type="radio" value="after12">12:00-14:00
+            <input name="time" type="radio" value="after15">15:00-17:00
+            <input name="time" type="radio" value="after17">17:00-19:00
+            
+            <br>
+            <p>Reminder (Open hours: 10:00am-7:00pm (lunch at 2:00-3:00))</p>
+            <p>Every service will be charged <b>HK$200</b> (including fee of string)</p>
+            <input type="submit">
+        </div>
+      </form>
+    </div>
+  </div>
+  </div>
+
+<script type="text/javascript">
+  document.getElementById("bk date").valueAsDate = new Date();
+  var today = new Date();
+  var dd = today.getDate();
+  var mm = today.getMonth()+1; 
+  var yyyy = today.getFullYear();
+  if(dd < 10){dd = '0' + dd} 
+  if(mm < 10){mm = '0' + mm} 
+  today = yyyy + '-' + mm + '-' + dd;
+  document.getElementById("bk date").setAttribute("min", today);  
+  
+</script>
+  <div class="jumbotron text-center" style="margin-bottom:0">
+  <p>Footer</p>
+  <button class="btn"><a href="http://www.fb.me"><img class="contact" src="{{url_for('static', filename='fb.jpg')}}" alt="fb"></a></button>
+  <button class="btn"><a href="http://www.fb.me"><img class="contact" src="{{url_for('static', filename='ig.jpg')}}" alt="ig"></a></button>
+  <button class="btn"><a href="http://www.fb.me"><img class="contact" src="{{url_for('static', filename='map.jpg')}}" alt="map"></a></button>
+</div>
+</body>
